@@ -13,6 +13,6 @@ def santa_users(users):
 
     return users_slovar
 
-users_list = [["Максим Нан", 12345], ["Александр сан"], ["Радик тян", 12354], ["Господин Павел", 14532]]
+users_list = [["Максим", 12345], ["Александр"], ["Олег", 12354], ["Господин Павел", 14532]]
 res=santa_users(users_list)
 print(res)
