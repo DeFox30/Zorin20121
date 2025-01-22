@@ -74,7 +74,14 @@ for _ in range(K):
 solutions = []
 place_verblud(board, N, L, solutions, positions)
 
+# Запись всех решений в файл output.txt
+with open('output.txt', 'w') as f:
+    if not solutions:
+        f.write("no solutions\n")
+    else:
+        for solution in solutions:
+            f.write(', '.join(f"({x},{y})" for x, y in solution) + '\n')
+
 # Вывод доски
 print_board(board, N)
-
 print("Общее количество решений:", len(solutions))
