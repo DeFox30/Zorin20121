@@ -10,14 +10,14 @@ def find_expression(numbers, target, index=1, current_expression=None, current_v
             return current_expression + "=" + str(target)
         return None
 
-    # текущий номер с +
+    # Номер с +
     result = find_expression(numbers, target, index + 1,
                              current_expression + "+" + str(numbers[index]),
                              current_value + numbers[index])
     if result:
         return result
 
-    # текущий номер с -
+    # Номер с -
     result = find_expression(numbers, target, index + 1,
                              current_expression + "-" + str(numbers[index]),
                              current_value - numbers[index])
@@ -26,14 +26,18 @@ def find_expression(numbers, target, index=1, current_expression=None, current_v
 
     return None
 
-data = input().strip().split()
+# Чтение входных данных
+data = input("N, X1...Xn, S: ").strip().split()
 N = int(data[0])
 numbers = list(map(int, data[1:N+1]))
 S = int(data[N+1])
 
+# Начальная точка рекурсии
 result = find_expression(numbers, S)
 
-if result:
-    print(result)
-else:
-    print("no solution")
+# Запись результата в файл
+with open('output.txt', 'w') as f:
+    if result:
+        f.write(result + '\n')
+    else:
+        f.write("no solution\n")
