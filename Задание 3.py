@@ -20,7 +20,7 @@ def unique_permutations(nums):
 
 
 # Ввод данных с клавиатуры
-input_data = input("Введите список целых чисел через запятую: ").split()
+input_data = input("Список чисел: ").split()
 
 # Получение результата
 output = unique_permutations(input_data)
