@@ -1,9 +1,9 @@
 from itertools import combinations
 
 # Вводим данные
-n = int(input())  # количество элементов в списке
-lst = list(map(int, input().split()))  # сам список
-c = int(input())  # целевое значение
+n = int(input("Количество элементов: "))
+lst = list(map(int, input("Элементы: ").split()))
+c = int(input("Целевое значение: "))
 
 # Ищем комбинации из 4 чисел
 closest_combination = None
