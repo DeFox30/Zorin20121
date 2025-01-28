@@ -9,9 +9,7 @@ def safe(board, x, y, n):
             return False
     return True
 
-
 def place_verblud(board, n, remaining, solutions, current_solution, start):
-    # Если все верблюды размещены, сохранить текущее решение
     if remaining == 0:
         solutions.add(tuple(sorted(current_solution)))
         return
@@ -19,20 +17,13 @@ def place_verblud(board, n, remaining, solutions, current_solution, start):
     for i in range(start, n * n):
         x, y = divmod(i, n)
         if board[x][y] == 0 and safe(board, x, y, n):
-            # Установить верблюда
             board[x][y] = 1
             current_solution.append((x, y))
-
-            # Рекурсивно разместить оставшихся верблюдов
             place_verblud(board, n, remaining - 1, solutions, current_solution, i + 1)
-
-            # Удалить верблюда
             board[x][y] = 0
             current_solution.pop()
 
-
 def threats(board, n):
-    # Генерация доски с угрозами
     threat_board = [['0'] * n for _ in range(n)]
     for i in range(n):
         for j in range(n):
@@ -46,9 +37,7 @@ def threats(board, n):
                         threat_board[i + dx][j + dy] = '*'
     return threat_board
 
-
 def print_board(board, n):
-    # Вывод доски
     threat_board = threats(board, n)
     for i in range(n):
         row = ''
@@ -61,21 +50,15 @@ def print_board(board, n):
                 row += '0 '
         print(row.strip())
 
-
-# Ввод данных
 n, l, k = map(int, input("Введите N (размер доски), L (фигуры для размещения), K (фигуры на доске): ").split())
-
-# Инициализация доски
 board = [[0] * n for _ in range(n)]
 positions = []
 
-# Размещение начальных фигур
 for _ in range(k):
     x, y = map(int, input("Введите координаты фигуры: ").split())
     board[x][y] = 1
     positions.append((x, y))
 
-# Поиск решений
 solutions = set()
 place_verblud(board, n, l, solutions, positions, 0)
 
@@ -85,8 +68,9 @@ with open('output2.txt', 'w') as f:
         f.write("no solutions\n")
     else:
         for solution in solutions:
-            f.write(', '.join(f"({x},{y})" for x, y in solution) + '\n')
+            # Форматирование координат для записи в файл
+            formatted_solution = ' '.join(f"({x},{y})" for x, y in solution)
+            f.write(formatted_solution + '\n')
 
-# Вывод доски
 print_board(board, n)
 print("Общее количество уникальных решений:", len(solutions))
